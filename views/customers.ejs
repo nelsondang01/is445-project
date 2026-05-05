@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage Customers</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Manage Customers</h1>
+
+  <p>Total Records: <%= count %></p>
+
+  <form action="/customers/search" method="POST">
+    <input type="number" name="cusId" placeholder="Customer ID" value="<%= search.cusId || '' %>">
+    <input type="text" name="cusFname" placeholder="First Name" value="<%= search.cusFname || '' %>">
+    <input type="text" name="cusLname" placeholder="Last Name" value="<%= search.cusLname || '' %>">
+
+    <input 
+      type="text" 
+      name="cusState" 
+      placeholder="State" 
+      maxlength="2" 
+      pattern="[A-Za-z]{2}"
+      value="<%= search.cusState || '' %>"
+    >
+
+    <input type="number" name="cusSalesYTD" placeholder="Sales YTD" value="<%= search.cusSalesYTD || '' %>">
+    <input type="number" name="cusSalesPrev" placeholder="Previous Sales" value="<%= search.cusSalesPrev || '' %>">
+
+    <button type="submit">Find Records</button>
+  </form>
+
+  <p><%= message %></p>
+
+  <% if (customers.length > 0) { %>
+    <h2>Results</h2>
+    <button>Create Customer</button>
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>State</th>
+        <th>Sales YTD</th>
+        <th>Previous Sales</th>
+        <th>Actions</th>
+      </tr>
+
+      <% customers.forEach(customer => { %>
+        <tr>
+          <td><%= customer.cusid %></td>
+          <td><%= customer.cusfname %></td>
+          <td><%= customer.cuslname %></td>
+          <td><%= customer.cusstate %></td>
+          <td><%= customer.cussalesytd %></td>
+          <td><%= customer.cussalesprev %></td>
+          <td>
+            <a href="/customers/edit/<%= customer.cusid %>">Edit</a>
+            |
+            <a href="#">Delete</a>
+          </td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } %>
+
+  <br>
+  <a href="/">Back Home</a>
+</body>
+</html>

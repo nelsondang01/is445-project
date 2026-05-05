@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Import Customers</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Import Customers</h1>
+
+  <p>Total Records: <%= count %></p>
+
+  <p><%= message %></p>
+
+  <form action="/import" method="POST" enctype="multipart/form-data">
+    <input type="file" name="customerFile" required>
+    <button type="submit">Import Customers</button>
+  </form>
+
+  <% if (summary) { %>
+    <h2>Import Summary</h2>
+    <p>Total Records Processed: <%= summary.processed %></p>
+    <p>Records Inserted Successfully: <%= summary.inserted %></p>
+    <p>Records Not Inserted: <%= summary.notInserted %></p>
+
+    <h3>Errors</h3>
+    <% if (summary.errors.length > 0) { %>
+      <ul>
+        <% summary.errors.forEach(error => { %>
+          <li><%= error %></li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No errors.</p>
+    <% } %>
+  <% } %>
+
+  <br>
+  <a href="/">Back Home</a>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Customer</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Edit Customer</h1>
+
+  <p><%= message %></p>
+
+  <form action="/customers/edit/<%= customer.cusid %>" method="POST">
+    <label>ID</label>
+    <input type="number" name="cusId" value="<%= customer.cusid %>" readonly>
+
+    <label>First Name</label>
+    <input type="text" name="cusFname" value="<%= customer.cusfname %>" required>
+
+    <label>Last Name</label>
+    <input type="text" name="cusLname" value="<%= customer.cuslname %>" required>
+
+    <label>State</label>
+    <input type="text" name="cusState" maxlength="2" pattern="[A-Za-z]{2}" value="<%= customer.cusstate %>">
+
+    <label>Sales YTD</label>
+    <input type="number" name="cusSalesYTD" value="<%= customer.cussalesytd %>">
+
+    <label>Previous Sales</label>
+    <input type="number" name="cusSalesPrev" value="<%= customer.cussalesprev %>">
+
+    <button type="submit">Update Customer</button>
+  </form>
+
+  <br>
+  <a href="/customers">Back to Customers</a>
+</body>
+</html>
